@@ -88,7 +88,7 @@ export default async function handler(req, res) {
       res.status(200).json({ 
         success: true, 
         data,
-        checkoutUrl: data.checkout_url || data.url, // Adjust based on API response
+        checkoutUrl: data.next_action.checkout_url,
         processedAmount: processAmount,
         originalAmount: totalAmount,
         wasLimited: totalAmount > maxAmount
