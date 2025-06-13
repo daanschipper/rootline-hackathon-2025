@@ -118,16 +118,34 @@ export default function BasketPage() {
               </div>
               {error && <p className="error">{error}</p>}
               <button 
-                className="cta-button primary-btn" 
-                onClick={handleCheckout}
-                disabled={loading}
+                onClick={handleCheckout} 
+                disabled={basket.length === 0}
+                className="explore-button"
               >
-                {loading ? 'Processing...' : 'Proceed to Payment'}
+                Proceed to Payment
               </button>
             </div>
           </>
         )}
       </div>
+      <style jsx>{`
+        .explore-button {
+          background: #D5B05C;
+          color: #000;
+          border: none;
+          padding: 1rem 2rem;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        .explore-button:hover:not(:disabled) {
+          background: #C0A050;
+        }
+        .explore-button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      `}</style>
     </>
   );
 } 
