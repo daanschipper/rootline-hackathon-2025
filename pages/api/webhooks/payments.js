@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     if (error) {
       console.error('Error inserting webhook:', error);
-      return res.status(500).json({ error: 'Failed to store webhook' });
+      return res.status(500).json({ error: 'Failed to store webhook', error: error });
     }
 
     // Respond with a success status1
