@@ -22,11 +22,13 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
     <header className="header">
       <div className="logo" onClick={onLogoClick || undefined} style={{ cursor: onLogoClick ? 'pointer' : undefined }}>
         <Link href="/">
+          <img src="/images/zenyth_logo.png" alt="Zenyth Logo" style={{ height: '40px', marginRight: '10px' }} />
           <span>ZENYTH</span>
         </Link>
       </div>
-      <button 
-        className="hamburger-menu" 
+      
+      <button
+        className="hamburger-menu"
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
@@ -34,17 +36,29 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
         <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
         <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
       </button>
+      
       <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); onShowYachts(); setIsMenuOpen(false); }}>
-          Yachts
-        </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); onShowJets(); setIsMenuOpen(false); }}>
-          Private Jets
-        </a>
-        <Link href="/members">Our Team</Link>
+        {onShowYachts ? (
+          <a href="#" onClick={(e) => { e.preventDefault(); onShowYachts(); setIsMenuOpen(false); }}>
+            Yachts
+          </a>
+        ) : (
+          <Link href="/" onClick={() => setIsMenuOpen(false)}>Yachts</Link>
+        )}
+        
+        {onShowJets ? (
+          <a href="#" onClick={(e) => { e.preventDefault(); onShowJets(); setIsMenuOpen(false); }}>
+            Private Jets
+          </a>
+        ) : (
+          <Link href="/" onClick={() => setIsMenuOpen(false)}>Private Jets</Link>
+        )}
+        
+        <Link href="/members" onClick={() => setIsMenuOpen(false)}>Our Team</Link>
         <a href="#" className="nav-link">Concierge</a>
         <a href="/terms" className="nav-link">Terms & Conditions</a>
         <a href="/partners" className="nav-link">Partners</a>
+        
         <Link href="/basket" onClick={() => setIsMenuOpen(false)}>
           <button className="basket-button">
             🛒
@@ -56,4 +70,4 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
       </nav>
     </header>
   );
-} 
+}

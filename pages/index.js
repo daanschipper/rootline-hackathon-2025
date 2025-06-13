@@ -96,43 +96,116 @@ export default function Home() {
   totalPrice = `€${totalPrice.toLocaleString()}`;
 
   return (
-    <>
-      <Header
-        onLogoClick={() => setView('home')}
-        onShowYachts={handleShowYachts}
-        onShowJets={handleShowJets}
-        basketCount={getBasketCount()}
-      />
-      {view === 'home' && <Hero onShowYachts={handleShowYachts} onShowJets={handleShowJets} />}
-      {view === 'yachts' && (
-        <SelectionSection 
-          title="Superyacht Collection" 
-          items={yachts} 
-          type="yacht" 
-          onSelect={handleSelectItem}
-          onAddToBasket={handleAddToBasket}
+    <div className="app-container">
+      {/* Full-page GIF background */}
+      <div className="gif-background">
+        <img src="/images/mainpage.gif" alt="Luxury background" />
+      </div>
+      
+      {/* Content overlay */}
+      <div className="content-overlay">
+        <Header
+          onLogoClick={() => setView('home')}
+          onShowYachts={handleShowYachts}
+          onShowJets={handleShowJets}
+          basketCount={getBasketCount()}
         />
-      )}
-      {view === 'jets' && (
-        <SelectionSection 
-          title="Private Aviation Fleet" 
-          items={jets} 
-          type="jet" 
-          onSelect={handleSelectItem}
-          onAddToBasket={handleAddToBasket}
-        />
-      )}
-      {view === 'services' && (
-        <ServicesSection
-          services={services}
-          selectedServices={selectedServices}
-          onToggleService={handleToggleService}
-          onBack={handleBack}
-          onCheckout={handleCheckout}
-          totalPrice={totalPrice}
-          selectedItem={selectedItem}
-        />
-      )}
-    </>
+        {view === 'home' && <Hero onShowYachts={handleShowYachts} onShowJets={handleShowJets} />}
+        {view === 'yachts' && (
+          <SelectionSection 
+            title="Superyacht Collection" 
+            items={yachts} 
+            type="yacht" 
+            onSelect={handleSelectItem}
+            onAddToBasket={handleAddToBasket}
+          />
+        )}
+        {view === 'jets' && (
+          <SelectionSection 
+            title="Private Aviation Fleet" 
+            items={jets} 
+            type="jet" 
+            onSelect={handleSelectItem}
+            onAddToBasket={handleAddToBasket}
+          />
+        )}
+        {view === 'services' && (
+          <ServicesSection
+            services={services}
+            selectedServices={selectedServices}
+            onToggleService={handleToggleService}
+            onBack={handleBack}
+            onCheckout={handleCheckout}
+            totalPrice={totalPrice}
+            selectedItem={selectedItem}
+          />
+        )}
+      </div>
+
+      <style jsx>{`
+        .app-container {
+          position: relative;
+          min-height: 100vh;
+          overflow: hidden;
+        }
+
+        .gif-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+        }
+
+        .gif-background img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: crisp-edges;
+          transform: scale(1.05); /* Slight scale to hide edge pixelation */
+          filter: blur(0.5px); /* Very subtle blur to smooth pixels */
+        }
+
+        .content-overlay {
+          position: relative;
+          z-index: 1;
+          min-height: 100vh;
+        }
+
+        /* Add a subtle overlay to improve text readability */
+        .gif-background::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(1px);
+          pointer-events: none;
+        }
+      `}</style>
+
+      <style jsx global>{`
+        body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+        }
+
+        /* Ensure Hero component text is visible on GIF */
+        .hero-section {
+          background: transparent !important;
+        }
+
+        /* You may need to adjust text colors for better visibility */
+        .hero-section h1,
+        .hero-section p {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      `}</style>
+    </div>
   );
-} 
+}
