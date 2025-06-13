@@ -82,6 +82,8 @@ export default async function handler(req, res) {
   
       const data = await response.json();
       
+      console.log(data);
+
       // If the payment API returns a checkout URL, send it to the client
       res.status(200).json({ 
         success: true, 
