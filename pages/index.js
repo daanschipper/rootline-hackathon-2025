@@ -20,6 +20,17 @@ const jets = [
   { id: 'j4', name: 'Cessna Citation X+', price: '€80,000', range: '3,460 nm', passengers: '12 passengers', speed: 'Mach 0.935', details: 'The fastest business jet with elegant interior and advanced avionics.', imageType: 'jet4' },
 ];
 
+const watches = [
+  { id: 'w1', name: 'Patek Philippe Nautilus 5711', price: '€1,500', movement: 'Automatic', case: '40mm', material: 'Platinum', details: 'The legendary Nautilus in platinum with a stunning blue dial. Limited production and highly sought after.', imageType: 'watch1' },
+  { id: 'w2', name: 'Audemars Piguet Royal Oak', price: '€850', movement: 'Automatic', case: '41mm', material: '18k Gold', details: 'Iconic Royal Oak with a gold case and bracelet. Features the legendary tapisserie dial pattern.', imageType: 'watch2' },
+  { id: 'w3', name: 'Rolex Daytona 116500', price: '€450', movement: 'Automatic', case: '40mm', material: 'Ceramic & Steel', details: 'The legendary Daytona with ceramic bezel. Features a chronograph and tachymeter scale.', imageType: 'watch3' },
+  { id: 'w4', name: 'Richard Mille RM 11-03', price: '€1,200', movement: 'Automatic', case: '50mm', material: 'Carbon TPT', details: 'Ultra-modern sports watch with flyback chronograph and annual calendar. Worn by elite athletes.', imageType: 'watch4' },
+  { id: 'w5', name: 'Vacheron Constantin Overseas', price: '€350', movement: 'Automatic', case: '41mm', material: 'Steel & Gold', details: 'Elegant sports watch with interchangeable straps. Features the iconic Maltese cross.', imageType: 'watch5' },
+  { id: 'w6', name: 'A. Lange & Söhne Zeitwerk', price: '€950', movement: 'Manual', case: '41.9mm', material: 'Platinum', details: 'Revolutionary digital display with mechanical movement. Features jumping hours and minutes.', imageType: 'watch6' },
+  { id: 'w7', name: 'Jaeger-LeCoultre Reverso', price: '€150', movement: 'Manual', case: '45.6mm', material: 'Steel', details: 'Art Deco icon with reversible case. Features a second time zone on the reverse.', imageType: 'watch7' },
+  { id: 'w8', name: 'Omega Speedmaster Moonwatch', price: '€100', movement: 'Manual', case: '42mm', material: 'Steel', details: 'The legendary Moonwatch, worn on the first lunar landing. Features a chronograph and tachymeter.', imageType: 'watch8' },
+];
+
 const services = [
   { id: 's1', name: 'Luxury Fleet Service', icon: '🚗', price: '€25,000', details: 'Maybach S-Class, Rolls-Royce Phantom, and Bugatti Chiron with professional chauffeurs' },
   { id: 's2', name: 'Helicopter Transfer', icon: '🚁', price: '€50,000', details: 'Private helicopter transfers with champagne service and VIP landing permits' },
@@ -54,6 +65,12 @@ export default function Home() {
     setSelectedType('jet');
   };
 
+  const handleShowWatches = () => {
+    setView('watches');
+    setSelectedItem(null);
+    setSelectedType('watch');
+  };
+
   const handleSelectItem = (item, type) => {
     setSelectedItem(item);
     setSelectedType(type);
@@ -70,7 +87,7 @@ export default function Home() {
   };
 
   const handleBack = () => {
-    setView(selectedType === 'yacht' ? 'yachts' : 'jets');
+    setView(selectedType === 'yacht' ? 'yachts' : selectedType === 'jet' ? 'jets' : 'watches');
   };
 
   const handleCheckout = () => {
@@ -82,7 +99,7 @@ export default function Home() {
   };
 
   const handleAddToBasket = (itemId, type) => {
-    const items = type === 'yacht' ? yachts : jets;
+    const items = type === 'yacht' ? yachts : type === 'jet' ? jets : watches;
     const item = items.find(i => i.id === itemId);
     addToBasket(item, type);
   };
@@ -108,9 +125,10 @@ export default function Home() {
           onLogoClick={() => setView('home')}
           onShowYachts={handleShowYachts}
           onShowJets={handleShowJets}
+          onShowWatches={handleShowWatches}
           basketCount={getBasketCount()}
         />
-        {view === 'home' && <Hero onShowYachts={handleShowYachts} onShowJets={handleShowJets} />}
+        {view === 'home' && <Hero onShowYachts={handleShowYachts} onShowJets={handleShowJets} onShowWatches={handleShowWatches} />}
         {view === 'yachts' && (
           <SelectionSection 
             title="Superyacht Collection" 
@@ -125,6 +143,15 @@ export default function Home() {
             title="Private Aviation Fleet" 
             items={jets} 
             type="jet" 
+            onSelect={handleSelectItem}
+            onAddToBasket={handleAddToBasket}
+          />
+        )}
+        {view === 'watches' && (
+          <SelectionSection 
+            title="Haute Horlogerie Collection" 
+            items={watches} 
+            type="watch" 
             onSelect={handleSelectItem}
             onAddToBasket={handleAddToBasket}
           />

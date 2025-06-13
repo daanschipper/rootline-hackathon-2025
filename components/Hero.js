@@ -1,16 +1,23 @@
 import React from 'react';
 
-export default function Hero({ onShowYachts, onShowJets }) {
+export default function Hero({ onShowYachts, onShowJets, onShowWatches }) {
   return (
-    <section className="hero" id="hero">
+    <div className="hero-section">
       <div className="hero-content">
-        <h1>Beyond Luxury</h1>
-        <p>Where Dreams Become Reality</p>
-        <div className="cta-buttons">
-          <button className="cta-button primary-btn" onClick={onShowYachts}><span>Explore Yachts</span></button>
-          <button className="cta-button secondary-btn" onClick={onShowJets}>Discover Jets</button>
+        <h1>Welcome to ZENYTH</h1>
+        <p>Your gateway to unparalleled luxury experiences</p>
+        <div className="hero-buttons">
+          <button onClick={onShowYachts} className="hero-button">
+            Explore Yachts
+          </button>
+          <button onClick={onShowJets} className="hero-button">
+            Discover Jets
+          </button>
+          <button onClick={onShowWatches} className="hero-button">
+            View Watches
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 } 

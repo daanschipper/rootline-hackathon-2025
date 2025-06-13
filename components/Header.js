@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useBasket } from '../context/BasketContext';
 
-export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
+export default function Header({ onLogoClick, onShowYachts, onShowJets, onShowWatches }) {
   const { basket } = useBasket();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -52,6 +52,14 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
           </a>
         ) : (
           <Link href="/" onClick={() => setIsMenuOpen(false)}>Private Jets</Link>
+        )}
+        
+        {onShowWatches ? (
+          <a href="#" onClick={(e) => { e.preventDefault(); onShowWatches(); setIsMenuOpen(false); }}>
+            Watches
+          </a>
+        ) : (
+          <Link href="/" onClick={() => setIsMenuOpen(false)}>Watches</Link>
         )}
         
         <Link href="/members" onClick={() => setIsMenuOpen(false)}>Our Team</Link>
