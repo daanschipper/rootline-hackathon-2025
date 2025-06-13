@@ -8,25 +8,24 @@ function createLuxuryImage(type, name) {
   }
 }
 
-export default function SelectionSection({ title, items, type, onSelect }) {
+export default function SelectionSection({ title, items, type, onSelect, renderItems }) {
   return (
     <section className="selection-section">
       <h2 className="section-title">{title}</h2>
-      <div className="selection-grid">
-        {items.map(item => (
-          <div className="luxury-card" key={item.id}>
-            <img src={createLuxuryImage(item.imageType, item.name)} alt={item.name} />
-            <div className="luxury-card-content">
-              <h3>{item.name}</h3>
-              <div className="price">{item.price}</div>
-              <div className="details">{item.details}</div>
-              <button className="select-btn" onClick={() => onSelect(item, type)}>
-                Select
-              </button>
+      <div className="selection-grid" id={`${type}s-grid`} dangerouslySetInnerHTML={{ __html: renderItems ? renderItems() : items.map(item => (
+        <div key={item.id} className="luxury-card" onClick={() => onSelect(item, type)}>
+          <img src={item.imageType} alt={item.name} />
+          <div className="luxury-card-content">
+            <h3>{item.name}</h3>
+            <div className="price">{item.price}/{type === 'yacht' ? 'day' : 'hour'}</div>
+            <div className="details">
+              <p>{type === 'yacht' ? `${item.length} • ${item.guests} • ${item.crew}` : `${item.range} • ${item.passengers}`}</p>
+              <p>{item.details}</p>
             </div>
+            <button className="select-btn">Select This {type === 'yacht' ? 'Yacht' : 'Jet'}</button>
           </div>
-        ))}
-      </div>
+        </div>
+      )).join('') }} />
     </section>
   );
 } 

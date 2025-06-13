@@ -565,4 +565,41 @@ nav {
     .services-grid {
         padding: 0 5px;
     }
+}
+
+.terms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.terms-section {
+    padding: 40px 0;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.terms-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.terms-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.terms-section h4 {
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.terms-section p {
+    margin-bottom: 10px;
+    line-height: 1.6;
 } 
