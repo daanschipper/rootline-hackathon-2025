@@ -7,16 +7,16 @@ import ServicesSection from '../components/ServicesSection';
 import { useBasket } from '../context/BasketContext';
 
 const yachts = [
-  { id: 'y1', name: 'Azure Dream', price: '€250,000', length: '120ft', guests: '12 guests', crew: '8 crew', details: 'Luxurious mega yacht with state-of-the-art amenities, infinity pool, and helipad.', imageType: 'yacht1' },
-  { id: 'y2', name: 'Golden Horizon', price: '€350,000', length: '150ft', guests: '16 guests', crew: '12 crew', details: 'Ultra-luxury yacht featuring spa, cinema, and multiple entertainment decks.', imageType: 'yacht2' },
-  { id: 'y3', name: 'Pearl Majesty', price: '€450,000', length: '180ft', guests: '20 guests', crew: '15 crew', details: 'Spectacular super yacht with beach club, gym, and underwater viewing lounge.', imageType: 'yacht3' },
-  { id: 'y4', name: 'Sapphire Seas', price: '€200,000', length: '95ft', guests: '10 guests', crew: '6 crew', details: 'Elegant yacht perfect for intimate gatherings with gourmet kitchen and sun deck.', imageType: 'yacht4' },
+  { id: 'y1', name: 'Azure Dream', price: '€25,000', length: '120ft', guests: '12 guests', crew: '8 crew', details: 'Luxurious mega yacht with state-of-the-art amenities, infinity pool, and helipad.', imageType: 'yacht1' },
+  { id: 'y2', name: 'Golden Horizon', price: '€15,000', length: '150ft', guests: '16 guests', crew: '12 crew', details: 'Ultra-luxury yacht featuring spa, cinema, and multiple entertainment decks.', imageType: 'yacht2' },
+  { id: 'y3', name: 'Pearl Majesty', price: '€15,000', length: '180ft', guests: '20 guests', crew: '15 crew', details: 'Spectacular super yacht with beach club, gym, and underwater viewing lounge.', imageType: 'yacht3' },
+  { id: 'y4', name: 'Sapphire Seas', price: '€20,000', length: '95ft', guests: '10 guests', crew: '6 crew', details: 'Elegant yacht perfect for intimate gatherings with gourmet kitchen and sun deck.', imageType: 'yacht4' },
 ];
 
 const jets = [
-  { id: 'j1', name: 'Gulfstream G650', price: '€150,000', range: '7,000 nm', passengers: '18 passengers', speed: 'Mach 0.925', details: 'Ultra-long-range business jet with luxurious cabin and advanced technology.', imageType: 'jet1' },
-  { id: 'j2', name: 'Bombardier Global 7500', price: '€180,000', range: '7,700 nm', passengers: '19 passengers', speed: 'Mach 0.925', details: 'The flagship of business aviation with four living spaces and dedicated crew rest area.', imageType: 'jet2' },
-  { id: 'j3', name: 'Dassault Falcon 8X', price: '€120,000', range: '6,450 nm', passengers: '16 passengers', speed: 'Mach 0.90', details: 'Trijet luxury with exceptional range and the quietest cabin in its class.', imageType: 'jet3' },
+  { id: 'j1', name: 'Gulfstream G650', price: '€15,000', range: '7,000 nm', passengers: '18 passengers', speed: 'Mach 0.925', details: 'Ultra-long-range business jet with luxurious cabin and advanced technology.', imageType: 'jet1' },
+  { id: 'j2', name: 'Bombardier Global 7500', price: '€18,000', range: '7,700 nm', passengers: '19 passengers', speed: 'Mach 0.925', details: 'The flagship of business aviation with four living spaces and dedicated crew rest area.', imageType: 'jet2' },
+  { id: 'j3', name: 'Dassault Falcon 8X', price: '€12,000', range: '6,450 nm', passengers: '16 passengers', speed: 'Mach 0.90', details: 'Trijet luxury with exceptional range and the quietest cabin in its class.', imageType: 'jet3' },
   { id: 'j4', name: 'Cessna Citation X+', price: '€80,000', range: '3,460 nm', passengers: '12 passengers', speed: 'Mach 0.935', details: 'The fastest business jet with elegant interior and advanced avionics.', imageType: 'jet4' },
 ];
 

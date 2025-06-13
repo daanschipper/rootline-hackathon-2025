@@ -8,12 +8,9 @@ export default async function handler(req, res) {
       const { totalAmount, basket } = req.body;
       
       // Check if amount is too high for staging environment
-      const maxAmount = 10000; // 10,000 EUR limit for staging
-      const processAmount = Math.min(totalAmount, maxAmount);
+
+      const processAmount = Math.min(totalAmount);
       
-      if (totalAmount > maxAmount) {
-        console.warn(`Amount ${totalAmount} exceeds staging limit. Processing ${maxAmount} instead.`);
-      }
       
       const amountA = (processAmount * 0.9).toFixed(2);
       const amountB = (processAmount * 0.1).toFixed(2);
@@ -33,9 +30,11 @@ export default async function handler(req, res) {
             quantity: processAmount.toFixed(2),
           },
           return_url: 'https://www.zenythluxury.life', // Updated to root domain
+
           splits: [
             {
-              account_id: 'acc_3dCEME8jKxB2Fw30G2Wmg7',
+              account_id: 'acc_5AmmO6JmU2Nyqo4vWkNU3B',
+
               amount: {
                 currency: 'EUR',
                 quantity: amountA,
@@ -53,7 +52,8 @@ export default async function handler(req, res) {
               ],
             },
             {
-              account_id: 'acc_4DdxkSfkEGUbYKmUlsxWgd',
+
+              account_id: 'acc_7mlgK1mPCPdEE81ZgTRlrb',
               amount: {
                 currency: 'EUR',
                 quantity: amountB,
@@ -89,9 +89,9 @@ export default async function handler(req, res) {
         success: true, 
         data,
         checkoutUrl: data.next_action.checkout_url,
+
         processedAmount: processAmount,
         originalAmount: totalAmount,
-        wasLimited: totalAmount > maxAmount
       });
       
     } catch (error) {
