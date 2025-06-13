@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             currency: 'EUR',
             quantity: processAmount.toFixed(2),
           },
-          return_url: 'https://www.zenythluxury.life/success', // Use full URL
+          return_url: 'https://www.zenythluxury.life', // Updated to root domain
           splits: [
             {
               account_id: 'acc_3dCEME8jKxB2Fw30G2Wmg7',
