@@ -1,12 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
 import { useBasket } from '../context/BasketContext';
+import Link from 'next/link';
+import Header from '../components/Header';
 
-export default function Basket() {
-  const { basket, updateQuantity, removeFromBasket, calculateTotal, getBasketCount } = useBasket();
+export default function BasketPage() {
   const router = useRouter();
+  const { basket, updateQuantity, removeFromBasket, calculateTotal, getBasketCount } = useBasket();
 
   const handleShowYachts = () => {
     router.push('/?view=yachts');
@@ -14,6 +14,10 @@ export default function Basket() {
 
   const handleShowJets = () => {
     router.push('/?view=jets');
+  };
+
+  const handleCheckout = () => {
+    router.push('/checkout');
   };
 
   return (
@@ -76,7 +80,7 @@ export default function Basket() {
               <div className="total-price">
                 Total: €{calculateTotal().toLocaleString()}
               </div>
-              <button className="cta-button primary-btn">
+              <button className="cta-button primary-btn" onClick={handleCheckout}>
                 Proceed to Checkout
               </button>
             </div>
