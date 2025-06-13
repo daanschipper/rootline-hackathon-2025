@@ -1,12 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
 import { useBasket } from '../context/BasketContext';
+import Link from 'next/link';
+import Header from '../components/Header';
 
-export default function Basket() {
-  const { basket, updateQuantity, removeFromBasket, calculateTotal, getBasketCount } = useBasket();
+export default function BasketPage() {
   const router = useRouter();
+  const { basket, updateQuantity, removeFromBasket, calculateTotal, getBasketCount } = useBasket();
 
   const handleShowYachts = () => {
     router.push('/?view=yachts');

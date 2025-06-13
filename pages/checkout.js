@@ -6,13 +6,13 @@ export default function Checkout() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { basket, getBasketTotal } = useBasket();
+  const { basket } = useBasket();
 
   const handlePayment = async () => {
     setLoading(true);
     setError(null);
 
-    const totalAmount = getBasketTotal();
+    const totalAmount = basket.reduce((total, item) => total + parseFloat(item.price.replace(/[^0-9.-]+/g, '')), 0);
     const amountA = (totalAmount * 0.9).toFixed(2);
     const amountB = (totalAmount * 0.1).toFixed(2);
 
@@ -21,20 +21,20 @@ export default function Checkout() {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
+          'x-api-key': 'sk_rootline_staging_ABmUeOwdSJjmu0Mm9MlGuSvBPU7GJnFloO6fRKtOM2FRTIf0xunzPEaiFEhHNi6FCiZgbX8SKAoVtLNSZrTgcqyGW9fS6B3uc',
           'rootline-version': '2024-04-23',
         },
         body: JSON.stringify({
-          account_id: '[platform-account-id]',
+          account_id: 'acc_2b8tGla2q1AUr70B3mMAxU',
           reference: 'your-reference',
           amount: {
             currency: 'EUR',
             quantity: totalAmount.toFixed(2),
           },
-          return_url: 'https://rootline.com/[PAYMENT_ID]',
+          return_url: 'www.zenythluxury.life',
           splits: [
             {
-              account_id: 'A',
+              account_id: 'acc_2b8tGla2q1AUr70B3mMAxU',
               amount: {
                 currency: 'EUR',
                 quantity: amountA,
@@ -52,7 +52,7 @@ export default function Checkout() {
               ],
             },
             {
-              account_id: 'B',
+              account_id: 'acc_4DdxkSfkEGUbYKmUlsxWgd',
               amount: {
                 currency: 'EUR',
                 quantity: amountB,
