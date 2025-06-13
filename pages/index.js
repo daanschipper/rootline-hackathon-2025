@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
+import Header from '../components/Header';
 import Hero from '../components/Hero';
 import SelectionSection from '../components/SelectionSection';
 import ServicesSection from '../components/ServicesSection';
@@ -82,17 +84,11 @@ export default function Home() {
 
   return (
     <>
-      <header>
-        <nav>
-          <div className="logo" onClick={() => setView('home')}>ZENITH RENTALS</div>
-          <div className="nav-links">
-            <a href="#" onClick={handleShowYachts}>Yachts</a>
-            <a href="#" onClick={handleShowJets}>Private Jets</a>
-            <a href="#">Members</a>
-            <a href="#">Concierge</a>
-          </div>
-        </nav>
-      </header>
+      <Header
+        onLogoClick={() => setView('home')}
+        onShowYachts={handleShowYachts}
+        onShowJets={handleShowJets}
+      />
       {view === 'home' && <Hero onShowYachts={handleShowYachts} onShowJets={handleShowJets} />}
       {view === 'yachts' && (
         <SelectionSection title="Superyacht Collection" items={yachts} type="yacht" onSelect={handleSelectItem} />
