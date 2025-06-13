@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           account_id: accountId,
           amount: {
             currency: 'EUR',
-            quantity: parseFloat(item.price.replace(/[^0-9.-]+/g, '')).toFixed(2).toString(),
+            quantity: (parseFloat(item.price.replace(/[^0-9.-]+/g, '')) * 0.1).toFixed(2).toString(),
           },
           reference: `order-${Date.now()}`,
         })
