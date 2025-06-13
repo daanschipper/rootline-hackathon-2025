@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function createLuxuryImage(type, name) {
   if (type.includes('yacht')) {
@@ -9,6 +9,24 @@ function createLuxuryImage(type, name) {
 }
 
 export default function SelectionSection({ title, items, type, onSelect, onAddToBasket }) {
+  const [addedItems, setAddedItems] = useState(new Set());
+
+  const handleAddToBasket = (itemId, type) => {
+    onAddToBasket(itemId, type);
+    setAddedItems(prev => {
+      const newSet = new Set(prev);
+      newSet.add(itemId);
+      return newSet;
+    });
+    setTimeout(() => {
+      setAddedItems(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(itemId);
+        return newSet;
+      });
+    }, 500);
+  };
+
   return (
     <section className="selection-section">
       <h2 className="section-title">{title}</h2>
@@ -30,8 +48,8 @@ export default function SelectionSection({ title, items, type, onSelect, onAddTo
                   <p>{item.details}</p>
                 </div>
                 <button 
-                  className="select-btn"
-                  onClick={() => onAddToBasket(item.id, type)}
+                  className={`select-btn ${addedItems.has(item.id) ? 'added' : ''}`}
+                  onClick={() => handleAddToBasket(item.id, type)}
                 >
                   Add to Basket
                 </button>

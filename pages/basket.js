@@ -1,14 +1,28 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import { useBasket } from '../context/BasketContext';
 
 export default function Basket() {
   const { basket, updateQuantity, removeFromBasket, calculateTotal, getBasketCount } = useBasket();
+  const router = useRouter();
+
+  const handleShowYachts = () => {
+    router.push('/?view=yachts');
+  };
+
+  const handleShowJets = () => {
+    router.push('/?view=jets');
+  };
 
   return (
     <>
-      <Header basketCount={getBasketCount()} />
+      <Header 
+        basketCount={getBasketCount()}
+        onShowYachts={handleShowYachts}
+        onShowJets={handleShowJets}
+      />
       <div className="basket-section">
         <h2 className="section-title">Your Luxury Selection</h2>
         {basket.length === 0 ? (
