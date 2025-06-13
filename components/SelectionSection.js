@@ -8,24 +8,38 @@ function createLuxuryImage(type, name) {
   }
 }
 
-export default function SelectionSection({ title, items, type, onSelect, renderItems }) {
+export default function SelectionSection({ title, items, type, onSelect, onAddToBasket }) {
   return (
     <section className="selection-section">
       <h2 className="section-title">{title}</h2>
-      <div className="selection-grid" id={`${type}s-grid`} dangerouslySetInnerHTML={{ __html: renderItems ? renderItems() : items.map(item => (
-        <div key={item.id} className="luxury-card" onClick={() => onSelect(item, type)}>
-          <img src={item.imageType} alt={item.name} />
-          <div className="luxury-card-content">
-            <h3>{item.name}</h3>
-            <div className="price">{item.price}/{type === 'yacht' ? 'day' : 'hour'}</div>
-            <div className="details">
-              <p>{type === 'yacht' ? `${item.length} • ${item.guests} • ${item.crew}` : `${item.range} • ${item.passengers}`}</p>
-              <p>{item.details}</p>
+      <div className="selection-grid">
+        {items.map(item => {
+          const imgSrc = `/images/${item.imageType}.png`;
+          return (
+            <div key={item.id} className="luxury-card">
+              <img src={imgSrc} alt={item.name} />
+              <div className="luxury-card-content">
+                <h3>{item.name}</h3>
+                <div className="price">{item.price}/{type === 'yacht' ? 'day' : 'hour'}</div>
+                <div className="details">
+                  {type === 'yacht' ? (
+                    <p>{item.length} • {item.guests} • {item.crew}</p>
+                  ) : (
+                    <p>{item.range} • {item.passengers}</p>
+                  )}
+                  <p>{item.details}</p>
+                </div>
+                <button 
+                  className="select-btn"
+                  onClick={() => onAddToBasket(item.id, type)}
+                >
+                  Add to Basket
+                </button>
+              </div>
             </div>
-            <button className="select-btn">Select This {type === 'yacht' ? 'Yacht' : 'Jet'}</button>
-          </div>
-        </div>
-      )).join('') }} />
+          );
+        })}
+      </div>
     </section>
   );
 } 

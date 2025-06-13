@@ -602,4 +602,142 @@ nav {
 .terms-section p {
     margin-bottom: 10px;
     line-height: 1.6;
+}
+
+/* Basket Styles */
+.basket-section {
+    padding: 120px 60px 60px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
+    z-index: 2;
+    position: relative;
+}
+
+.empty-basket {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.empty-basket p {
+    font-size: 24px;
+    color: var(--platinum);
+    margin-bottom: 30px;
+}
+
+.basket-items {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.basket-item {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-details h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.item-price {
+    font-size: 20px;
+    color: var(--champagne);
+    margin-bottom: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-btn {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quantity-btn:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--primary);
+}
+
+.quantity-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quantity {
+    font-size: 20px;
+    color: var(--gold);
+    min-width: 40px;
+    text-align: center;
+}
+
+.remove-btn {
+    background: transparent;
+    color: var(--platinum);
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-left: 20px;
+}
+
+.remove-btn:hover {
+    color: var(--gold);
+}
+
+.basket-summary {
+    max-width: 1000px;
+    margin: 40px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 20px;
+}
+
+/* Basket Button in Header */
+.basket-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 20px;
+}
+
+.basket-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--gold);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 } 

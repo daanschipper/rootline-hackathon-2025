@@ -1,6 +1,7 @@
+import React from 'react';
 import Link from 'next/link';
 
-export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
+export default function Header({ onLogoClick, onShowYachts, onShowJets, basketCount = 0 }) {
   return (
     <header>
       <nav>
@@ -22,6 +23,10 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
           <a href="#" className="nav-link">Concierge</a>
           <a href="/terms" className="nav-link">Terms & Conditions</a>
           <a href="/partners" className="nav-link">Partners</a>
+          <Link href="/basket" className="basket-button">
+            🛒
+            {basketCount > 0 && <span className="basket-count">{basketCount}</span>}
+          </Link>
         </div>
       </nav>
     </header>

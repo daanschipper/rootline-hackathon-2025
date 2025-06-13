@@ -1,5 +1,12 @@
+import { BasketProvider } from '../context/BasketContext';
 import '../styles/globals.css';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-} 
+function MyApp({ Component, pageProps }) {
+  return (
+    <BasketProvider>
+      <Component {...pageProps} />
+    </BasketProvider>
+  );
+}
+
+export default MyApp; 
