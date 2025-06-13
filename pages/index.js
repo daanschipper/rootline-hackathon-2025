@@ -7,7 +7,7 @@ import ServicesSection from '../components/ServicesSection';
 import { useBasket } from '../context/BasketContext';
 
 const yachts = [
-  { id: 'y1', name: 'Azure Dream', price: '€25,000', length: '120ft', guests: '12 guests', crew: '8 crew', details: 'Luxurious mega yacht with state-of-the-art amenities, infinity pool, and helipad.', imageType: 'yacht1' },
+  { id: 'y1', name: 'Azure Dream', price: '€20,000', length: '120ft', guests: '12 guests', crew: '8 crew', details: 'Luxurious mega yacht with state-of-the-art amenities, infinity pool, and helipad.', imageType: 'yacht1' },
   { id: 'y2', name: 'Golden Horizon', price: '€15,000', length: '150ft', guests: '16 guests', crew: '12 crew', details: 'Ultra-luxury yacht featuring spa, cinema, and multiple entertainment decks.', imageType: 'yacht2' },
   { id: 'y3', name: 'Pearl Majesty', price: '€15,000', length: '180ft', guests: '20 guests', crew: '15 crew', details: 'Spectacular super yacht with beach club, gym, and underwater viewing lounge.', imageType: 'yacht3' },
   { id: 'y4', name: 'Sapphire Seas', price: '€20,000', length: '95ft', guests: '10 guests', crew: '6 crew', details: 'Elegant yacht perfect for intimate gatherings with gourmet kitchen and sun deck.', imageType: 'yacht4' },
