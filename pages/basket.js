@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useBasket } from '../context/BasketContext';
 import Link from 'next/link';
@@ -7,6 +7,8 @@ import Header from '../components/Header';
 export default function BasketPage() {
   const router = useRouter();
   const { basket, updateQuantity, removeFromBasket, calculateTotal, getBasketCount } = useBasket();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleShowYachts = () => {
     router.push('/?view=yachts');
@@ -16,8 +18,42 @@ export default function BasketPage() {
     router.push('/?view=jets');
   };
 
-  const handleCheckout = () => {
-    router.push('/checkout');
+  const handleCheckout = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          totalAmount: calculateTotal(),
+          basket,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Payment failed');
+      }
+
+      const data = await response.json();
+      
+      // Redirect to the payment checkout URL
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+      
+    } catch (err) {
+      setError(err.message);
+      console.error('Payment error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,8 +116,13 @@ export default function BasketPage() {
               <div className="total-price">
                 Total: €{calculateTotal().toLocaleString()}
               </div>
-              <button className="cta-button primary-btn" onClick={handleCheckout}>
-                Proceed to Checkout
+              {error && <p className="error">{error}</p>}
+              <button 
+                className="cta-button primary-btn" 
+                onClick={handleCheckout}
+                disabled={loading}
+              >
+                {loading ? 'Processing...' : 'Proceed to Payment'}
               </button>
             </div>
           </>
