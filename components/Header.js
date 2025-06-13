@@ -5,7 +5,7 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
     <header>
       <nav>
         <div className="logo" onClick={onLogoClick || undefined} style={{ cursor: onLogoClick ? 'pointer' : undefined }}>
-          <Link href="/">ZENITH RENTALS</Link>
+          <Link href="/">ZENYTH</Link>
         </div>
         <div className="nav-links">
           {onShowYachts ? (
@@ -19,7 +19,8 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
             <Link href="/">Private Jets</Link>
           )}
           <Link href="/members">Our Team</Link>
-          <Link href="/concierge">Concierge</Link>
+          <a href="#" className="nav-link">Concierge</a>
+          <a href="/terms" className="nav-link">Terms & Conditions</a>
         </div>
       </nav>
     </header>

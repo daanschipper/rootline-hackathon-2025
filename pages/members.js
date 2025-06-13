@@ -15,7 +15,7 @@ export default function Members() {
       <section className="hero" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div className="hero-content">
           <h1>Our Team</h1>
-          <p>Exclusive content and benefits for Zenith Rentals members coming soon.</p>
+          <p>Exclusive content and benefits for Zenyth members coming soon.</p>
         </div>
         <div style={{ display: 'flex', gap: '32px', marginTop: '48px', flexWrap: 'wrap', justifyContent: 'center' }}>
           {members.map((member, idx) => (
