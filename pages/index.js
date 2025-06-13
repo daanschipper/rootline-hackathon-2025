@@ -32,14 +32,14 @@ const watches = [
 ];
 
 const services = [
-  { id: 's1', name: 'Luxury Fleet Service', icon: '🚗', price: '€25,000', details: 'Maybach S-Class, Rolls-Royce Phantom, and Bugatti Chiron with professional chauffeurs' },
-  { id: 's2', name: 'Helicopter Transfer', icon: '🚁', price: '€50,000', details: 'Private helicopter transfers with champagne service and VIP landing permits' },
-  { id: 's3', name: 'Haute Horlogerie Collection', icon: '⌚', price: '€100,000', details: 'Access to exclusive Patek Philippe, Richard Mille, and unique auction pieces' },
-  { id: 's4', name: 'Michelin Star Chef Team', icon: '👨‍🍳', price: '€30,000', details: '3-Michelin-starred chef team for personalized culinary experiences' },
-  { id: 's5', name: 'Wellness & Beauty Suite', icon: '💆', price: '€40,000', details: 'Celebrity spa therapists, beauty experts, and medical wellness team' },
-  { id: 's6', name: 'Elite Security Detail', icon: '🛡️', price: '€80,000', details: 'Former special forces security team with armored vehicles and cyber protection' },
-  { id: 's7', name: 'Entertainment Ensemble', icon: '🎭', price: '€60,000', details: 'World-class musicians, celebrity DJs, and private performance artists' },
-  { id: 's8', name: 'Marine Adventure Package', icon: '🏄', price: '€35,000', details: 'Submarines, jet skis, diving equipment, and professional instructors' },
+  { id: 's1', name: 'Luxury Fleet Service', icon: '🚗', price: '€2,500', details: 'Maybach S-Class, Rolls-Royce Phantom, and Bugatti Chiron with professional chauffeurs' },
+  { id: 's2', name: 'Helicopter Transfer', icon: '🚁', price: '€5,000', details: 'Private helicopter transfers with champagne service and VIP landing permits' },
+  { id: 's3', name: 'Haute Horlogerie Collection', icon: '⌚', price: '€10,000', details: 'Access to exclusive Patek Philippe, Richard Mille, and unique auction pieces' },
+  { id: 's4', name: 'Michelin Star Chef Team', icon: '👨‍🍳', price: '€3,000', details: '3-Michelin-starred chef team for personalized culinary experiences' },
+  { id: 's5', name: 'Wellness & Beauty Suite', icon: '💆', price: '€4,000', details: 'Celebrity spa therapists, beauty experts, and medical wellness team' },
+  { id: 's6', name: 'Elite Security Detail', icon: '🛡️', price: '€8,000', details: 'Former special forces security team with armored vehicles and cyber protection' },
+  { id: 's7', name: 'Entertainment Ensemble', icon: '🎭', price: '€6,000', details: 'World-class musicians, celebrity DJs, and private performance artists' },
+  { id: 's8', name: 'Marine Adventure Package', icon: '🏄', price: '€3,500', details: 'Submarines, jet skis, diving equipment, and professional instructors' },
 ];
 
 function parsePrice(price) {
@@ -50,7 +50,8 @@ export default function Home() {
   const [view, setView] = useState('home');
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedType, setSelectedType] = useState('');
-  const [selectedServices, setSelectedServices] = useState(new Set());
+  const [showServiceMenu, setShowServiceMenu] = useState(false);
+  const [selectedServices, setSelectedServices] = useState([]);
   const { addToBasket, getBasketCount } = useBasket();
 
   const handleShowYachts = () => {
@@ -74,34 +75,33 @@ export default function Home() {
   const handleSelectItem = (item, type) => {
     setSelectedItem(item);
     setSelectedType(type);
-    setView('services');
+    if (type === 'yacht') {
+      setShowServiceMenu(true);
+    } else {
+      setShowServiceMenu(false);
+      addToBasket(item);
+      setView('home');
+    }
   };
 
-  const handleToggleService = (serviceId) => {
-    setSelectedServices(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(serviceId)) newSet.delete(serviceId);
-      else newSet.add(serviceId);
-      return newSet;
+  const handleServiceChange = (serviceId) => {
+    setSelectedServices((prev) =>
+      prev.includes(serviceId)
+        ? prev.filter((id) => id !== serviceId)
+        : [...prev, serviceId]
+    );
+  };
+
+  const handleAddToBasket = () => {
+    addToBasket(selectedItem);
+    selectedServices.forEach((serviceId) => {
+      const service = services.find((s) => s.id === serviceId);
+      if (service) addToBasket(service);
     });
-  };
-
-  const handleBack = () => {
-    setView(selectedType === 'yacht' ? 'yachts' : selectedType === 'jet' ? 'jets' : 'watches');
-  };
-
-  const handleCheckout = () => {
-    alert('Reservation complete!');
-    setView('home');
+    setShowServiceMenu(false);
     setSelectedItem(null);
-    setSelectedServices(new Set());
-    setSelectedType('');
-  };
-
-  const handleAddToBasket = (itemId, type) => {
-    const items = type === 'yacht' ? yachts : type === 'jet' ? jets : watches;
-    const item = items.find(i => i.id === itemId);
-    addToBasket(item, type);
+    setSelectedServices([]);
+    setView('home');
   };
 
   let totalPrice = 0;
@@ -135,7 +135,6 @@ export default function Home() {
             items={yachts} 
             type="yacht" 
             onSelect={handleSelectItem}
-            onAddToBasket={handleAddToBasket}
           />
         )}
         {view === 'jets' && (
@@ -144,7 +143,6 @@ export default function Home() {
             items={jets} 
             type="jet" 
             onSelect={handleSelectItem}
-            onAddToBasket={handleAddToBasket}
           />
         )}
         {view === 'watches' && (
@@ -153,19 +151,33 @@ export default function Home() {
             items={watches} 
             type="watch" 
             onSelect={handleSelectItem}
-            onAddToBasket={handleAddToBasket}
           />
         )}
-        {view === 'services' && (
-          <ServicesSection
-            services={services}
-            selectedServices={selectedServices}
-            onToggleService={handleToggleService}
-            onBack={handleBack}
-            onCheckout={handleCheckout}
-            totalPrice={totalPrice}
-            selectedItem={selectedItem}
-          />
+        {showServiceMenu && selectedItem && (
+          <div className="service-menu-modal" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
+            <div style={{ background: '#181818', padding: 32, borderRadius: 16, minWidth: 320, maxWidth: 400 }}>
+              <h2 style={{ color: '#FFD700', fontFamily: 'Playfair Display, serif', marginBottom: 24 }}>Add Services for {selectedItem.name}</h2>
+              <form onSubmit={e => { e.preventDefault(); handleAddToBasket(); }}>
+                {services.map(service => (
+                  <label key={service.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 16, color: '#fff', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedServices.includes(service.id)}
+                      onChange={() => handleServiceChange(service.id)}
+                      style={{ marginRight: 12 }}
+                    />
+                    <span style={{ fontSize: 24, marginRight: 8 }}>{service.icon}</span>
+                    <span style={{ color: '#FFD700', fontWeight: 600, fontFamily: 'Playfair Display, serif', marginRight: 8 }}>{service.name}</span>
+                    <span style={{ color: '#F7E7CE', fontWeight: 400 }}>{service.price}</span>
+                  </label>
+                ))}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 24 }}>
+                  <button type="button" onClick={() => { setShowServiceMenu(false); setSelectedItem(null); setSelectedServices([]); }} style={{ marginRight: 16, background: 'transparent', color: '#FFD700', border: '1px solid #FFD700', borderRadius: 4, padding: '8px 20px', cursor: 'pointer' }}>Cancel</button>
+                  <button type="submit" style={{ background: '#FFD700', color: '#181818', border: 'none', borderRadius: 4, padding: '8px 20px', fontWeight: 700, cursor: 'pointer' }}>Add to Basket</button>
+                </div>
+              </form>
+            </div>
+          </div>
         )}
       </div>
 
