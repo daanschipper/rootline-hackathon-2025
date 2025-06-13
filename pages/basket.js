@@ -16,6 +16,10 @@ export default function Basket() {
     router.push('/?view=jets');
   };
 
+  const handleCheckout = () => {
+    router.push('/checkout');
+  };
+
   return (
     <>
       <Header 
@@ -76,7 +80,7 @@ export default function Basket() {
               <div className="total-price">
                 Total: €{calculateTotal().toLocaleString()}
               </div>
-              <button className="cta-button primary-btn">
+              <button className="cta-button primary-btn" onClick={handleCheckout}>
                 Proceed to Checkout
               </button>
             </div>
