@@ -18,7 +18,7 @@ export default function Header({ onLogoClick, onShowYachts, onShowJets }) {
           ) : (
             <Link href="/">Private Jets</Link>
           )}
-          <Link href="/members">Members</Link>
+          <Link href="/members">Our Team</Link>
           <Link href="/concierge">Concierge</Link>
         </div>
       </nav>
