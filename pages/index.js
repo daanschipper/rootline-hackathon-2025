@@ -125,25 +125,11 @@ export default function Home() {
 
   return (
     <>
-<<<<<<< Updated upstream
       <Header
         onLogoClick={() => setView('home')}
         onShowYachts={handleShowYachts}
         onShowJets={handleShowJets}
       />
-=======
-      <header>
-        <nav>
-          <div className="logo" onClick={() => setView('home')}>ZENYTH</div>
-          <div className="nav-links">
-            <a href="#" onClick={handleShowYachts}>Yachts</a>
-            <a href="#" onClick={handleShowJets}>Private Jets</a>
-            <a href="#">Members</a>
-            <a href="#" onClick={() => setView('terms')}>Terms & Conditions</a>
-          </div>
-        </nav>
-      </header>
->>>>>>> Stashed changes
       {view === 'home' && <Hero onShowYachts={handleShowYachts} onShowJets={handleShowJets} />}
       {view === 'yachts' && (
         <SelectionSection title="Superyacht Collection" items={yachts} type="yacht" onSelect={handleSelectItem} renderItems={renderYachts} />
